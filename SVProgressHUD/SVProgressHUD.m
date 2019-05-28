@@ -451,7 +451,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
                                                      attributes:@{NSFontAttributeName: self.statusLabel.font}
                                                         context:NULL];
         labelHeight = ceilf(CGRectGetHeight(labelRect));
-        labelWidth = ceilf(CGRectGetWidth(labelRect));
+        labelWidth = ceilf(CGRectGetWidth(labelRect)) + SVProgressHUDLabelSpacing;
     }
     
     // Calculate hud size based on content
