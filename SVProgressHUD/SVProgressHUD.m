@@ -469,12 +469,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     }
     
     // |-spacing-content-spacing-|
-    if (labelWidth > contentWidth) {
-        hudWidth = SVProgressHUDHorizontalSpacing + SVProgressHUDLabelSpacing
-            + labelWidth + SVProgressHUDLabelSpacing + SVProgressHUDHorizontalSpacing;
-    } else {
-        hudWidth = SVProgressHUDHorizontalSpacing + contentWidth + SVProgressHUDHorizontalSpacing;
-    }
+    hudWidth = SVProgressHUDHorizontalSpacing + MAX(labelWidth, contentWidth) + SVProgressHUDHorizontalSpacing;
     
     // |-spacing-content-(labelSpacing-label-)spacing-|
     hudHeight = SVProgressHUDVerticalSpacing + labelHeight + contentHeight + SVProgressHUDVerticalSpacing;
