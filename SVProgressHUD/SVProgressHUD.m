@@ -733,8 +733,9 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 
 - (void)moveToPoint:(CGPoint)newCenter rotateAngle:(CGFloat)angle {
     self.hudView.transform = CGAffineTransformMakeRotation(angle);
-    if (self.containerView) {
-        self.hudView.center = CGPointMake(self.containerView.center.x + self.offsetFromCenter.horizontal, self.containerView.center.y + self.offsetFromCenter.vertical);
+    UIView *containerView = self.containerViewBlock();
+    if (containerView) {
+        self.hudView.center = CGPointMake(containerView.center.x + self.offsetFromCenter.horizontal, containerView.center.y + self.offsetFromCenter.vertical);
     } else {
         self.hudView.center = CGPointMake(newCenter.x + self.offsetFromCenter.horizontal, newCenter.y + self.offsetFromCenter.vertical);
     }
@@ -1462,8 +1463,8 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     if (!_isInitializing) _defaultAnimationType = animationType;
 }
 
-- (void)setContainerView:(UIView *)containerView {
-    if (!_isInitializing) _containerView = containerView;
+- (void)setContainerViewBlock:(nullable ContainerViewBlock)block {
+    if (!_isInitializing) _containerViewBlock = block;
 }
 
 - (void)setMinimumSize:(CGSize)minimumSize {
