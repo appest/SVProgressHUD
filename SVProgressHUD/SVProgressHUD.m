@@ -94,8 +94,8 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     [self sharedView].defaultAnimationType = type;
 }
 
-+ (void)setContainerView:(nullable UIView*)containerView {
-    [self sharedView].containerView = containerView;
++ (void)setContainerViewBlock:(nullable ContainerViewBlock)block {
+    [self sharedView].containerViewBlock = block;
 }
 
 + (void)setMinimumSize:(CGSize)minimumSize {
@@ -539,8 +539,9 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 - (void)updateViewHierarchy {
     // Add the overlay to the application window if necessary
     if(!self.controlView.superview) {
-        if(self.containerView){
-            [self.containerView addSubview:self.controlView];
+        UIView *containerView = self.containerViewBlock();
+        if(containerView){
+            [containerView addSubview:self.controlView];
         } else {
 #if !defined(SV_APP_EXTENSIONS)
             [self.frontWindow addSubview:self.controlView];
